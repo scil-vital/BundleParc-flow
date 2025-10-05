@@ -1,26 +1,137 @@
 {
-  "name": "",
-  "homePage": "",
-  "repos": {
-    "https://github.com/scilus/nf-neuro.git": {
-      "modules": {
-        "nf-neuro": {
-          "reconst/dtimetrics": {
-            "branch": "main",
-            "git_sha": "452075a707a9769b0509fc33a1051e8ba80799bf",
-            "installed_by": ["modules"]
-          }
+    "name": "",
+    "homePage": "",
+    "repos": {
+        "https://github.com/scilus/nf-neuro.git": {
+            "modules": {
+                "nf-neuro": {
+                    "betcrop/fslbetcrop": {
+                        "branch": "main",
+                        "git_sha": "247d96886548c83b01812a61f5b1393fa4e911e7",
+                        "installed_by": [
+                            "preproc_dwi",
+                            "topup_eddy"
+                        ]
+                    },
+                    "denoising/mppca": {
+                        "branch": "main",
+                        "git_sha": "1c7984a32135efc6547518cff5724312013bcd4f",
+                        "installed_by": [
+                            "preproc_dwi"
+                        ]
+                    },
+                    "image/cropvolume": {
+                        "branch": "main",
+                        "git_sha": "44a8807e115f15d720ff952229c7d7540952b587",
+                        "installed_by": [
+                            "preproc_dwi"
+                        ]
+                    },
+                    "image/resample": {
+                        "branch": "main",
+                        "git_sha": "a3fbaa40d649f221b099322105936afe09115c0c",
+                        "installed_by": [
+                            "preproc_dwi"
+                        ]
+                    },
+                    "preproc/eddy": {
+                        "branch": "main",
+                        "git_sha": "90eb8505e8e5081c64f7599c105c40525263902e",
+                        "installed_by": [
+                            "topup_eddy"
+                        ]
+                    },
+                    "preproc/gibbs": {
+                        "branch": "main",
+                        "git_sha": "60e21b273653eec3b710b91562e714c74ef4d0c7",
+                        "installed_by": [
+                            "preproc_dwi"
+                        ]
+                    },
+                    "preproc/n4": {
+                        "branch": "main",
+                        "git_sha": "6243a8961471549d479d882b1cf3a7bd7106c527",
+                        "installed_by": [
+                            "preproc_dwi"
+                        ]
+                    },
+                    "preproc/normalize": {
+                        "branch": "main",
+                        "git_sha": "6dd708169f742b1bcd01b94936abec6ca87de0f0",
+                        "installed_by": [
+                            "preproc_dwi"
+                        ]
+                    },
+                    "preproc/topup": {
+                        "branch": "main",
+                        "git_sha": "1ddb3a337aa087cb31519873b9f86d02c96acbf8",
+                        "installed_by": [
+                            "topup_eddy"
+                        ]
+                    },
+                    "reconst/dtimetrics": {
+                        "branch": "main",
+                        "git_sha": "452075a707a9769b0509fc33a1051e8ba80799bf",
+                        "installed_by": [
+                            "modules"
+                        ]
+                    },
+                    "reconst/fodf": {
+                        "branch": "main",
+                        "git_sha": "c399791d89aad88aceedec1bc5221dfeb0952cd5",
+                        "installed_by": [
+                            "modules"
+                        ]
+                    },
+                    "reconst/frf": {
+                        "branch": "main",
+                        "git_sha": "a51881f1c316e0e52b68fa66d7465c32339e2142",
+                        "installed_by": [
+                            "modules"
+                        ]
+                    },
+                    "reconst/meanfrf": {
+                        "branch": "main",
+                        "git_sha": "f9676160a7d9e71ad072c39f32bcc7e7f1621d7a",
+                        "installed_by": [
+                            "modules"
+                        ]
+                    },
+                    "utils/extractb0": {
+                        "branch": "main",
+                        "git_sha": "0245a01f7ab9bec0753e2235fba489e3353f1a33",
+                        "installed_by": [
+                            "preproc_dwi",
+                            "topup_eddy"
+                        ]
+                    }
+                }
+            },
+            "subworkflows": {
+                "nf-neuro": {
+                    "load_test_data": {
+                        "branch": "main",
+                        "git_sha": "a79cb5c9645269db389c563f674b17c5e900a50b",
+                        "installed_by": [
+                            "subworkflows"
+                        ]
+                    },
+                    "preproc_dwi": {
+                        "branch": "main",
+                        "git_sha": "247d96886548c83b01812a61f5b1393fa4e911e7",
+                        "installed_by": [
+                            "subworkflows"
+                        ]
+                    },
+                    "topup_eddy": {
+                        "branch": "main",
+                        "git_sha": "90eb8505e8e5081c64f7599c105c40525263902e",
+                        "installed_by": [
+                            "preproc_dwi"
+                        ]
+                    }
+                }
+            }
         }
-      },
-      "subworkflows": {
-        "nf-neuro": {
-          "load_test_data": {
-            "branch": "main",
-            "git_sha": "a79cb5c9645269db389c563f674b17c5e900a50b",
-            "installed_by": ["subworkflows"]
-          }
-        }
-      }
     }
-  }
 }
