@@ -28,11 +28,11 @@ process BUNDLE_BUNDLEPARC {
                 'scilus/scilus:2.2.0' }"
 
     input:
-        tuple val(meta), path(fodf)
+        tuple val(meta), path(fodf), path(checkpoint)
 
     output:
     // TODO nf-core: Named file extensions MUST be emitted for ALL output channels
-    tuple val(meta), path("*.nii.gz"), emit: bundles
+    tuple val(meta), path("*.nii.gz"), emit: labels
     path "versions.yml"              , emit: versions
 
     when:
@@ -47,7 +47,7 @@ process BUNDLE_BUNDLEPARC {
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
     export OMP_NUM_THREADS=1
 
-    scil_fodf_bundleparc $fodf --out_prefix ${prefix}__ --nb_pts ${nb_pts} --out_folder tmp
+    scil_fodf_bundleparc $fodf --out_prefix ${prefix}__ --nb_pts ${nb_pts} --out_folder tmp --checkpoint ${checkpoint}
     mv tmp/* .
     rm -r tmp
 
