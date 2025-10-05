@@ -1,30 +1,33 @@
-#!/usr/bin/env nextflow
+ #!/usr/bin/env nextflow
 
-//include { RECONST_DTIMETRICS } from 'modules/nf-neuro/reconst/dtimetrics/main'
-workflow get_data {
-    main:
-        if ( !params.input ) {
-            log.info "You must provide an input directory containing all files using:"
-            log.info ""
-            log.info "    --input=/path/to/[input]   Input directory containing the file needed"
-            log.info "                        |"
-            log.info "                        └-- Input"
-            log.info "                             └-- participants.*"
-            log.info ""
-            error "Please resubmit your command with the previous file structure."
-        }
+ include { BUNDLE_BUNDLEPARC } from './modules/local/bundle/bundleparc'
 
-        input = file(params.input)
-        // ** Loading all files. ** //
-        participants_channel = Channel.fromFilePairs("$input/participants.*", flat: true)
-            { "participants_files" }
+ workflow get_data {
+     main:
+         if ( !params.input ) {
+             log.info "You must provide an input directory containing all images using:"
+             log.info ""
+             log.info "    --input=/path/to/[input]   Input directory containing your subjects"
+             log.info "                        |"
+             log.info "                        ├-- S1"
+             log.info "                        |    ├-- *fodf.nii.gz"
+             log.info "                        └-- S2"
+             log.info "                             └-- *fodf.nii.gz"
+             log.info ""
+             error "Please resubmit your command with the previous file structure."
+         }
 
-    emit:
-        participants = participants_channel
-}
+         input = file(params.input)
+         // ** Loading FODF files. ** //
+         fodf_channel = Channel.fromFilePairs("$input/**/**/*fodf.nii.gz", size: 1, flat: true)
+             { it.parent.parent.name + "_" + it.parent.name } // Set the subject filename as subjectID + '_' + session.
+             .map{ sid, fodf -> [ [id: sid], fodf ] }
+     emit:
+         fodf = fodf_channel
+ }
 
-workflow {
-    // ** Now call your input workflow to fetch your files ** //
-    data = get_data()
-    data.participants.view()
-}
+ workflow {
+     inputs = get_data()
+
+     BUNDLE_BUNDLEPARC ( inputs.fodf )
+ }

@@ -1,0 +1,67 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: tracking_localtracking
+description: process local tracking
+keywords:
+  - Tractography
+  - Local tracking
+  - Diffusion MRI
+tools:
+  - scilpy:
+      description: "The Sherbrooke Connectivity Imaging Lab (SCIL) Python dMRI processing
+        toolbox."
+      homepage: "https://github.com/scilus/scilpy.git"
+      identifier: ""
+args:
+  - nb_pts:
+      type: int 
+      default: 10
+      description: "Number of labels (parcels) to predict."
+  - enable_gpu:
+      type: boolean
+      default: false
+      description: Enable GPU tracking kernel.
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test', single_end:false ]`
+    - fodf:
+        type: file
+        description: Nifti image of spherical harmonic file (fodf)
+        pattern: "*.{nii,nii.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_4001 # NIFTI format
+output:
+  labels:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*.nii.gz":
+          type: file
+          description: Label maps
+          pattern: "*.nii.gz"
+          ontologies: []
+  config:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*__bundleparc_config.json":
+          type: file
+          description: Json file containing tracking parameters.
+          pattern: "*__bundleparc_config.{json}"
+          ontologies:
+            - edam: http://edamontology.org/format_3464 # JSON
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
+authors:
+  - "@AntoineTheb"
