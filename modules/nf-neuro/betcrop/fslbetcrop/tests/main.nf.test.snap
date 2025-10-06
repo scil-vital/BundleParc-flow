@@ -1,0 +1,227 @@
+{
+    "betcrop - fslbetcrop - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,dc971e6f976ef949f2cf565392f3600e"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-09-30T13:29:28.969954"
+    },
+    "betcrop - fslbetcrop - dwi": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_bet.nii.gz:md5,6a3960fdbf0f4dc6e52e1a240aab3e77"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_bet_mask.nii.gz:md5,aad98ede91402c7f8494d5af1900ac93"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_boundingBox.pkl:md5,0f0659fcc6ea1796e19558ba16a682c4"
+                    ]
+                ],
+                "3": [
+                    "versions.yml:md5,48fde397edb3c0c57fff98e427f1f579"
+                ],
+                "bbox": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_boundingBox.pkl:md5,0f0659fcc6ea1796e19558ba16a682c4"
+                    ]
+                ],
+                "image": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_bet.nii.gz:md5,6a3960fdbf0f4dc6e52e1a240aab3e77"
+                    ]
+                ],
+                "mask": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_bet_mask.nii.gz:md5,aad98ede91402c7f8494d5af1900ac93"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,48fde397edb3c0c57fff98e427f1f579"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-09-30T13:27:23.817381"
+    },
+    "betcrop - fslbetcrop - t1": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_bet.nii.gz:md5,3c983126d6226c914030e8d6a5c63f6e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_bet_mask.nii.gz:md5,c5d967b9ef5ffb31b543fecb87ef8479"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_boundingBox.pkl:md5,a4f59418fe7fb9d067475197de914aa8"
+                    ]
+                ],
+                "3": [
+                    "versions.yml:md5,48fde397edb3c0c57fff98e427f1f579"
+                ],
+                "bbox": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_boundingBox.pkl:md5,a4f59418fe7fb9d067475197de914aa8"
+                    ]
+                ],
+                "image": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_bet.nii.gz:md5,3c983126d6226c914030e8d6a5c63f6e"
+                    ]
+                ],
+                "mask": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_bet_mask.nii.gz:md5,c5d967b9ef5ffb31b543fecb87ef8479"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,48fde397edb3c0c57fff98e427f1f579"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-09-30T13:28:12.176385"
+    },
+    "betcrop - fslbetcrop - t1 - dilate": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_bet.nii.gz:md5,3c983126d6226c914030e8d6a5c63f6e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_bet_mask.nii.gz:md5,78a93e32e7ff3093649509e59256645b"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_boundingBox.pkl:md5,a4f59418fe7fb9d067475197de914aa8"
+                    ]
+                ],
+                "3": [
+                    "versions.yml:md5,48fde397edb3c0c57fff98e427f1f579"
+                ],
+                "bbox": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_boundingBox.pkl:md5,a4f59418fe7fb9d067475197de914aa8"
+                    ]
+                ],
+                "image": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_bet.nii.gz:md5,3c983126d6226c914030e8d6a5c63f6e"
+                    ]
+                ],
+                "mask": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test__image_bet_mask.nii.gz:md5,78a93e32e7ff3093649509e59256645b"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,48fde397edb3c0c57fff98e427f1f579"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2025-09-30T13:29:00.369918"
+    }
+}
