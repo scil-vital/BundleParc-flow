@@ -9,7 +9,7 @@
  include {   RECONST_DTIMETRICS } from './modules/nf-neuro/reconst/dtimetrics/main'
  include {   RECONST_FODF       } from './modules/nf-neuro/reconst/fodf/main'
 
- workflow get_data {
+ workflow PREPROC {
      main:
 
          ch_versions = Channel.empty()
@@ -56,9 +56,7 @@
                 .join(PREPROC_DWI.out.bval)
                 .join(PREPROC_DWI.out.bvec)
                 .join(PREPROC_DWI.out.b0_mask)
-                .join(Channel.empty())
-                .join(Channel.empty())
-                .join(Channel.empty())
+                .map { it + [[], [], []] }
 
             RECONST_FRF( ch_reconst_frf )
             ch_versions = ch_versions.mix(RECONST_FRF.out.versions.first())
@@ -121,7 +119,7 @@
  workflow {
 
      ch_versions = Channel.empty()
-     inputs = get_data()
+     inputs = PREPROC()
      ch_versions = ch_versions.mix(inputs.versions.first())
 
      BUNDLEPARC ( inputs.fodf )
