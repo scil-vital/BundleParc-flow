@@ -18,6 +18,7 @@
 process BUNDLE_BUNDLEPARC {
     tag "$meta.id"
     label 'process_single'
+    errorStrategy 'ignore'
 
     // TODO nf-core: List required Conda package(s).
     //               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
@@ -47,9 +48,15 @@ process BUNDLE_BUNDLEPARC {
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
     export OMP_NUM_THREADS=1
 
-    scil_fodf_bundleparc $fodf --out_prefix ${prefix}__ --nb_pts ${nb_pts} --out_folder tmp --checkpoint ${checkpoint}
-    mv tmp/* .
-    rm -r tmp
+    stride="\$( mrinfo -stride $fodf )"
+    if [[ "\$stride" == "-1 2 3 4" ]]; then
+        scil_fodf_bundleparc $fodf --out_prefix ${prefix}__ --nb_pts ${nb_pts} --out_folder tmp --checkpoint ${checkpoint} --keep_biggest
+        mv tmp/* .
+        rm -r tmp
+    else
+        echo "Invalid stride ("\$stride"), must be -1 2 3 4"
+        exit 1
+    fi
 
     cat <<-BUNDLEPARC_INFO > ${prefix}__bundleparc_config.json
     {"nb_pts": "${task.ext.nb_pts}"}
