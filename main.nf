@@ -3,13 +3,13 @@
  include {   BUNDLEPARC         } from './subworkflows/local/bundleparc'
  include {   PREPROC_DWI        } from './subworkflows/nf-neuro/preproc_dwi/main'
  
- // RECONSTRUCTION
+ include {   CHECK_STRIDE       } from './modules/local/dwi/checkstride'
  include {   RECONST_FRF        } from './modules/nf-neuro/reconst/frf/main'
  include {   RECONST_MEANFRF    } from './modules/nf-neuro/reconst/meanfrf/main'
  include {   RECONST_DTIMETRICS } from './modules/nf-neuro/reconst/dtimetrics/main'
  include {   RECONST_FODF       } from './modules/nf-neuro/reconst/fodf/main'
 
- workflow PREPROC {
+ workflow GET_FODF {
      main:
 
          ch_versions = Channel.empty()
@@ -31,8 +31,16 @@
                              flat: true) { it.parent.parent.name + "_" + it.parent.name } // Set the subject filename as subjectID + '_' + session.
                  .map{ sid, bval, bvec, dwi -> [ [id: sid], dwi, bval, bvec ] }
 
+            CHECK_STRIDE ( ch_sid_dwi )
+
+            ch_versions = ch_versions.mix(CHECK_STRIDE.out.versions.first())
+
+            ch_preproc_dwi = CHECK_STRIDE.out.dwi
+                .join(CHECK_STRIDE.out.bval)
+                .join(CHECK_STRIDE.out.bvec)
+
             PREPROC_DWI(
-                ch_sid_dwi,
+                ch_preproc_dwi,
                 Channel.empty(),
                 Channel.empty(),
                 Channel.empty(),
@@ -104,8 +112,8 @@
              log.info "                    |    ├-- *dwi.bval"
              log.info "                    |    ├-- *dwi.bvec"
              log.info "                    └-- S2" 
-             log.info "                    |    ├-- *dwi.nii.gz"
-             log.info "                    |    ├-- *dwi.bval"
+             log.info "                         ├-- *dwi.nii.gz"
+             log.info "                         ├-- *dwi.bval"
              log.info "                         └-- *dwi.bvec"
              log.info ""
 
@@ -119,7 +127,7 @@
  workflow {
 
      ch_versions = Channel.empty()
-     inputs = PREPROC()
+     inputs = GET_FODF()
      ch_versions = ch_versions.mix(inputs.versions.first())
 
      BUNDLEPARC ( inputs.fodf )

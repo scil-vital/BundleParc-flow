@@ -1,0 +1,28 @@
+BundleParc-flow
+
+You can provide either diffusion weighted imaging (DWI) volumes input, incl. related bvecs and bvals, or
+fiber orientation distribution (FOD) volumes.
+
+fODF **MUST** be in spherical harmonics (SH), `descoteaux07` basis of order 6 or 8, with stride of
+-1,2,3,4. If you have any doubts, it is recommended that you use the --dwi input instead.
+
+You can provide an input directory containing all FOD volumes using:
+    --fodf=/path/to/[input]   Input directory containing your subjects
+                    |
+                    ├-- S1
+                    |    ├-- *fodf.nii.gz
+                    └-- S2
+                         └-- *fodf.nii.gz
+
+Or an input directory containing all DWI input using:
+    --dwi=/path/to/[input]   Input directory containing your subjects
+                    |
+                    ├-- S1
+                    |    ├-- *dwi.nii.gz
+                    |    ├-- *dwi.bval
+                    |    ├-- *dwi.bvec
+                    └-- S2
+                         ├-- *dwi.nii.gz
+                         ├-- *dwi.bval
+                         └-- *dwi.bvec
+
