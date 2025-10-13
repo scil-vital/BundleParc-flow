@@ -13,7 +13,10 @@
      main:
 
          ch_versions = Channel.empty()
-         if ( params.fodf ) {
+         if ( params.fodf && params.dwi ) {
+            error "Can only specify either --dwi or --fodf but not both. See USAGE for instructions."
+         }
+         else if ( params.fodf ) {
 
              input = file(params.fodf)
              // ** Loading FODF files. ** //
