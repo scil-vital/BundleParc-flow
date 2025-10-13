@@ -16,7 +16,17 @@ Paper submitted to Medical Image Analysis. In the meantime, please contact us fo
    git clone git@github.com:scil-vital/BundleParc-flow.git
    cd BundleParc-flow
     ```
+That's it ! 
 
 ## Usage
 
-See USAGE for instructions on how to run the workflow.
+1. From FOD
+  ```bash
+  nextflow run main.nf --fodf <input> -profile docker
+  ```
+2. From DWI
+  ```bash
+  nextflow run main.nf --dwi <input> -profile docker
+  ```
+
+See USAGE for more instructions on how to run the workflow.
