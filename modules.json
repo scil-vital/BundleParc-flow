@@ -5,6 +5,13 @@
         "https://github.com/scilus/nf-neuro.git": {
             "modules": {
                 "nf-neuro": {
+                    "betcrop/dwi2mask": {
+                        "branch": "main",
+                        "git_sha": "553cbef7843cbc7d42e9711a604371669c71928b",
+                        "installed_by": [
+                            "modules"
+                        ]
+                    },
                     "betcrop/fslbetcrop": {
                         "branch": "main",
                         "git_sha": "247d96886548c83b01812a61f5b1393fa4e911e7",

@@ -40,7 +40,12 @@ process BUNDLE_BUNDLEPARC {
     task.ext.when == null || task.ext.when
 
     script:
-    def nb_pts = task.ext.nb_pts ?: ''
+    def nb_pts = task.ext.nb_pts ? '--nb_pts ' + task.ext.nb_pts : ''
+    def min_blob_size = task.ext.min_blob_size ? '--min_blob_size ' + task.ext.min_blob_size : ''
+    def keep_biggest = task.ext.keep_biggest ? '--keep_biggest' : ''
+    def continuous = task.ext.continuous ? '--continuous' : ''
+    def mm = task.ext.mm ? '--mm ' + task.ext.mm : ''
+    def half = task.ext.half_precision ? '--half_precision' : ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
@@ -50,7 +55,7 @@ process BUNDLE_BUNDLEPARC {
 
     stride="\$( mrinfo -stride $fodf )"
     if [[ "\$stride" == "-1 2 3 4" ]]; then
-        scil_fodf_bundleparc $fodf --out_prefix ${prefix}__ --nb_pts ${nb_pts} --out_folder tmp --checkpoint ${checkpoint} --keep_biggest
+        scil_fodf_bundleparc $fodf --out_prefix ${prefix}__ ${nb_pts} ${mm} ${continuous} ${min_blob_size} ${keep_biggest} ${half} --out_folder tmp --checkpoint ${checkpoint}
         mv tmp/* .
         rm -r tmp
     else
