@@ -39,9 +39,9 @@ OPTIONAL ARGUMENTS:
     --output: Output folder [default: 'result'].
     --eddy_max_concurrent: Nb. of proceses to run eddy. [default: 16].
     --vram: Size of your GPU, in GB. Will impact the number of BundleParc instances run in parallel [default: 24].
-    --half_precision: Use half-precision floating points (float16) to reduce the VRAM nedded to run BundleParc. May impact accuracy [default: false].
+    --half_precision: Use half-precision floating points (float16) to reduce the VRAM needed to run BundleParc. May impact accuracy [default: false].
     --nb_pts: Nb. of bundle subdivisions [default: 10].
     --min_blob_size: Minimum size of 'blob' in output bundle to keep, in voxels [default: 50].
     --continuous: Output 'continuous' label maps ]0, 1] instead of discrete maps [default: false].
-    --keep_biggest_blob: Only keep the biggest blob instead of removing smaller ones (< 50 voxels) [dwfault: false]. 
+    --keep_biggest_blob: Only keep the biggest blob instead of removing smaller ones (< 50 voxels) [default: false]. 
     --mm: Produce label maps where each label has a specific 'thickness' (in mm.) instead of a fixed number of labels. Experimental, YMMV, but may be useful for smaller bundles [default: false].

@@ -1,20 +1,20 @@
  #!/usr/bin/env nextflow
 
  include {   BUNDLEPARC         } from './subworkflows/local/bundleparc'
- include {   PREPROC_DWI        } from './subworkflows/nf-neuro/preproc_dwi/main'
- include {   BETCROP_DWI2MASK   } from './modules/nf-neuro/betcrop/dwi2mask/main' 
- include {   CHECK_STRIDE       } from './modules/local/dwi/checkstride'
- include {   RECONST_FRF        } from './modules/nf-neuro/reconst/frf/main'
- include {   RECONST_MEANFRF    } from './modules/nf-neuro/reconst/meanfrf/main'
- include {   RECONST_DTIMETRICS } from './modules/nf-neuro/reconst/dtimetrics/main'
- include {   RECONST_FODF       } from './modules/nf-neuro/reconst/fodf/main'
+include {   PREPROC_DWI        } from './subworkflows/nf-neuro/preproc_dwi/main'
+include {   BETCROP_DWI2MASK   } from './modules/nf-neuro/betcrop/dwi2mask/main' 
+include {   CHECK_STRIDE       } from './modules/local/dwi/checkstride'
+include {   RECONST_FRF        } from './modules/nf-neuro/reconst/frf/main'
+include {   RECONST_MEANFRF    } from './modules/nf-neuro/reconst/meanfrf/main'
+include {   RECONST_DTIMETRICS } from './modules/nf-neuro/reconst/dtimetrics/main'
+include {   RECONST_FODF       } from './modules/nf-neuro/reconst/fodf/main'
 
- workflow {
+workflow {
 
-     ch_versions = Channel.empty()
-      if ( params.fodf && params.dwi ) {
+    ch_versions = Channel.empty()
+    if ( params.fodf && params.dwi ) {
         error "Can only specify either --dwi or --fodf but not both. See USAGE for instructions."
-     }
+    }
      else if ( params.fodf ) {
 
          input = file(params.fodf)
