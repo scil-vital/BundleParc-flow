@@ -20,16 +20,13 @@ That's it !
 
 ## Usage
 
-1. From FOD
-  ```bash
-    nextflow run main.nf --fodf <input> -profile docker --nb_pts <nb>
-  ```
-2. From DWI
-  ```bash
-  nextflow run main.nf --dwi <input> -profile docker --nb_pts <nb>
-  ```
+```bash
+nextflow run main.nf -profile docker --dwi <input> [OPTIONAL ARGUMENTS]
+```
 
-See USAGE for more instructions on how to run the workflow. Have a question ? Found a problem ? Please open an issue or contact me at antoine (dot) theberge (at) usherbrooke (dot) ca.
+See USAGE for arguments and more instructions on how to run the workflow.
+
+Have a question ? Found a problem ? Please open an issue or contact me at antoine (dot) theberge (at) usherbrooke (dot) ca.
 
 ## Bundles
 
