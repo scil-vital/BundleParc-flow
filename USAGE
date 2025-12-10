@@ -2,13 +2,13 @@ BundleParc-flow
 
 USAGE
 
-nextflow run main.nf -profile docker [OPTIONAL ARGUMENTS] (--dwi, --fodf)
+nextflow run scil-vital/BundleParc-flow -profile docker [OPTIONAL ARGUMENTS] (--dwi, --fodf)
 
 DESCRIPTION
 
 You can provide either diffusion weighted imaging (DWI) volumes input, incl. related bvecs and bvals, or fiber orientation distribution (FOD) volumes.
 
-It is **strongly** recommended to use the --dwi input providing the files listed below. If you are completely sure your fODFs are in the correct format, you can skip fODF modelling by using the --fodf input: fODF **MUST** be in spherical harmonics (SH), `descoteaux07` basis of order 6 or 8, with stride of -1,2,3,4. If you have any doubts, it is recommended that you use the --dwi input instead.
+It is **strongly** recommended to use the --dwi input providing the files listed below. If you are completely sure your fODFs are in the correct format, you can skip fODF modelling by using the --fodf input: fODF **MUST** be in spherical harmonics (SH), `descoteaux07_legacy` basis of order 6 or 8, with stride of -1,2,3,4. If you have any doubts, it is recommended that you use the --dwi input instead.
 
 You can provide DWI volumes:
     --dwi=/path/to/[input]   Input directory containing your subjects
