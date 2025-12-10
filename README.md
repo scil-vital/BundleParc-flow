@@ -9,22 +9,13 @@ Paper submitted to Medical Image Analysis. In the meantime, please contact us fo
 - [Nextflow](https://www.nextflow.io/)
 - [Docker](https://www.docker.com/) or [Singularity](https://sylabs.io/docs/)
 
-## Installation
-1. Clone the repository:
-
-   ```bash
-   git clone git@github.com:scil-vital/BundleParc-flow.git
-   cd BundleParc-flow
-    ```
-That's it ! 
-
 ## Usage
 
 ```bash
-nextflow run main.nf -profile docker --dwi <input> [OPTIONAL ARGUMENTS]
+nextflow run scil-vital/BundleParc-flow -profile docker [OPTIONAL ARGUMENTS] --dwi
 ```
 
-See USAGE for arguments and more instructions on how to run the workflow.
+This command will fetch the latest version and run the pipeline. See USAGE for arguments and more instructions on how to run the workflow.
 
 Have a question ? Found a problem ? Please open an issue or contact me at antoine (dot) theberge (at) usherbrooke (dot) ca.
 

@@ -25,8 +25,8 @@ process BUNDLE_BUNDLEPARC {
     //               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
     // TODO nf-core: See section in main README for further information regarding finding and adding container addresses to the section below.
         container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-                'https://scil.usherbrooke.ca/containers/scilus_2.2.0.sif':
-                'scilus/scilus:2.2.0' }"
+                'https://scil.usherbrooke.ca/containers/scilus_dev.sif':
+                'scilus/scilus:dev' }"
 
     input:
         tuple val(meta), path(fodf), path(checkpoint)
@@ -42,7 +42,7 @@ process BUNDLE_BUNDLEPARC {
     script:
     def nb_pts = task.ext.nb_pts ? '--nb_pts ' + task.ext.nb_pts : ''
     def min_blob_size = task.ext.min_blob_size ? '--min_blob_size ' + task.ext.min_blob_size : ''
-    def keep_biggest = task.ext.keep_biggest ? '--keep_biggest' : ''
+    def keep_biggest = task.ext.keep_biggest_blob ? '--keep_biggest_blob' : ''
     def continuous = task.ext.continuous ? '--continuous' : ''
     def mm = task.ext.mm ? '--mm ' + task.ext.mm : ''
     def half = task.ext.half_precision ? '--half_precision' : ''
@@ -55,7 +55,7 @@ process BUNDLE_BUNDLEPARC {
 
     stride="\$( mrinfo -stride $fodf )"
     if [[ "\$stride" == "-1 2 3 4" ]]; then
-        scil_fodf_bundleparc $fodf --out_prefix ${prefix}__ ${nb_pts} ${mm} ${continuous} ${min_blob_size} ${keep_biggest} ${half} --out_folder tmp --checkpoint ${checkpoint}
+        scil_fodf_bundleparc $fodf --out_prefix ${prefix}__ ${nb_pts} ${mm} ${continuous} ${min_blob_size} ${keep_biggest} ${half} --out_dir tmp --checkpoint ${checkpoint} -v DEBUG
         mv tmp/* .
         rm -r tmp
     else
