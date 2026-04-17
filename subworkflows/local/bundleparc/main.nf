@@ -8,7 +8,7 @@ def fetch_bundleparc_checkpoint(weightsUrl, dest) {
         java.nio.file.Files.createDirectories(path)
     }
 
-    def weights = new File("$dest/weights/123_4_5_bundleparc.ckpt").withOutputStream { out ->
+    def weights = new File("$dest/weights/123_4_5.ckpt").withOutputStream { out ->
         new URL(weightsUrl).withInputStream { from -> out << from; }
     }
 }
@@ -27,11 +27,11 @@ workflow BUNDLEPARC {
         }
 
         else {
-            if ( !file("$workflow.workDir/weights/123_4_5_bundleparc.ckpt").exists() ) {
-            fetch_bundleparc_checkpoint("https://zenodo.org/records/15579498/files/123_4_5_bundleparc.ckpt",
+            if ( !file("$workflow.workDir/weights/123_4_5.ckpt").exists() ) {
+            fetch_bundleparc_checkpoint("https://zenodo.org/records/19634429/files/123_4_5.ckpt",
                                     "${workflow.workDir}/")
             }
-            weights = Channel.fromPath("$workflow.workDir/weights/123_4_5_bundleparc.ckpt", checkIfExists: true)
+            weights = Channel.fromPath("$workflow.workDir/weights/123_4_5.ckpt", checkIfExists: true)
         }
 
         // ** Register the weights to subject's space. Set up weights file as moving image ** //

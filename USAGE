@@ -1,28 +1,26 @@
 BundleParc-flow
 
-You can provide either diffusion weighted imaging (DWI) volumes input, incl. related bvecs and bvals, or
-fiber orientation distribution (FOD) volumes.
+You must provide diffusion weighted imaging (DWI) volumes input, incl. related bvecs and bvals.
 
-fODF **MUST** be in spherical harmonics (SH), `descoteaux07` basis of order 6 or 8, with stride of
--1,2,3,4. If you have any doubts, it is recommended that you use the --dwi input instead.
-
-You can provide an input directory containing all FOD volumes using:
-    --fodf=/path/to/[input]   Input directory containing your subjects
-                    |
-                    ├-- S1
-                    |    ├-- *fodf.nii.gz
-                    └-- S2
-                         └-- *fodf.nii.gz
-
-Or an input directory containing all DWI input using:
+The input directory containing all DWI input must have this structure:
     --dwi=/path/to/[input]   Input directory containing your subjects
                     |
                     ├-- S1
                     |    ├-- *dwi.nii.gz
                     |    ├-- *dwi.bval
-                    |    ├-- *dwi.bvec
+                    |    └-- *dwi.bvec
                     └-- S2
                          ├-- *dwi.nii.gz
                          ├-- *dwi.bval
                          └-- *dwi.bvec
+
+Options:
+- `--dwi` : path to the input diffusion MRI (see USAGE for file structure)
+- `--nb_pts <NB>` : number of labels to parcellate the bundles into (default: 10)
+- `--mm <NN>` : whether to use millimeters as unit for the parcellation (default: false, i.e. use percentage of the bundle length)
+- `--continuous` : whether to use continuous parcellation (default: false, i.e. use discrete parcellation)
+- `--min_blob_size <NB>` : minimum size of the blobs in voxels(default: 50 voxels). Smaller blobs will be pruned.
+- `--keep_biggest_blob` : whether to keep only the biggest blob (default: false, i.e. keep all blobs)
+- `--half_precision`: run the model using half precision (float16) instead of full precision (float32) (default: false). This can speed up the inference on compatible GPUs and reduce memory usage, but may slightly reduce the accuracy of the parcellation. Use with caution.
+
 

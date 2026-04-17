@@ -32,10 +32,17 @@ process CHECK_STRIDE {
     export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
     export OMP_NUM_THREADS=1
 
-    mrconvert $dwi ${prefix}__dwi_stride_corrected.nii.gz -stride "-1 2 3 4"
-    dwigradcheck $dwi -fslgrad $bvec $bval \
-        -export_grad_fsl ${prefix}__dwi_stride_corrected.bvec \
-        ${prefix}__dwi_stride_corrected.bval
+    stride="\$( mrinfo -stride $dwi )"
+    if [[ "\$stride" == "-1 2 3 4" ]]; then
+        ln -s $dwi ${prefix}__dwi_stride_corrected.nii.gz
+        ln -s $bvec ${prefix}__dwi_stride_corrected.bvec
+        ln -s $bval ${prefix}__dwi_stride_corrected.bval
+    else
+        mrconvert $dwi ${prefix}__dwi_stride_corrected.nii.gz -stride "-1 2 3 4"
+        dwigradcheck $dwi -fslgrad $bvec $bval \
+            -export_grad_fsl ${prefix}__dwi_stride_corrected.bvec \
+            ${prefix}__dwi_stride_corrected.bval
+    fi
 
 		cat <<-END_VERSIONS > versions.yml
     "${task.process}":
