@@ -2,13 +2,7 @@
 process CHECK_STRIDE {
     tag "$meta.id"
 
-    // TODO nf-core: List required Conda package(s).
-    //               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
-    //               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
-    // TODO nf-core: See section in main README for further information regarding finding and adding container addresses to the section below.
-        container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-                'https://scil.usherbrooke.ca/containers/scilus_2.2.0.sif':
-                'scilus/scilus:2.2.0' }"
+    container "mrtrix3/mrtrix3:3.0.5"
 
     input:
         tuple val(meta), path(dwi), path(bval), path(bvec)

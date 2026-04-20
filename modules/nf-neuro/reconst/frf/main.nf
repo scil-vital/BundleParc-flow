@@ -4,7 +4,7 @@ process RECONST_FRF {
     tag "$meta.id"
     label 'process_single'
 
-    container "scilus/scilpy:2.2.0_cpu"
+    container "scilus/scilpy:2.2.2_cpu"
 
     input:
         tuple val(meta), path(dwi), path(bval), path(bvec), path(mask), path(wm_mask), path(gm_mask), path(csf_mask)
@@ -51,9 +51,7 @@ process RECONST_FRF {
     def set_csf_mask = csf_mask ? "--mask_csf $csf_mask" : ""
 
     """
-    export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=1
-    export OMP_NUM_THREADS=1
-    export OPENBLAS_NUM_THREADS=1
+    export OMP_NUM_THREADS=${task.ext.single_thread ? 1 : task.cpus}
 
     if [ "$set_method" = "ssst" ]
     then

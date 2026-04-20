@@ -1,118 +1,46 @@
 {
-    "name": "BundleParc",
-    "homePage": "https://github.com/scil-vital/BundleParc",
-    "repos": {
-        "https://github.com/nf-neuro/modules.git": {
-            "modules": {
-                "nf-neuro": {
-                    "betcrop/dwi2mask": {
-                        "branch": "main",
-                        "git_sha": "31193a9ea0839d2ce29898504812ffdb515b67dc",
-                        "installed_by": [
-                            "modules"
-                        ]
-                    },
-                    "betcrop/synthstrip": {
-                        "branch": "main",
-                        "git_sha": "f2d66a70673d3002965ab9fbd648db7b5b9d4a34",
-                        "installed_by": [
-                            "_",
-                            "c",
-                            "d",
-                            "e",
-                            "i",
-                            "o",
-                            "p",
-                            "r",
-                            "w"
-                        ]
-                    },
-                    "image/applymask": {
-                        "branch": "main",
-                        "git_sha": "43a2f9ee1c18cdc34a1865c410e507603a50cd5c",
-                        "installed_by": [
-                            "_",
-                            "c",
-                            "d",
-                            "e",
-                            "i",
-                            "o",
-                            "p",
-                            "r",
-                            "w"
-                        ]
-                    },
-                    "image/convert": {
-                        "branch": "main",
-                        "git_sha": "e4dc6b2d5832eab9a6d0f6e4fab4841e7bb7bb64",
-                        "installed_by": [
-                            "_",
-                            "c",
-                            "d",
-                            "e",
-                            "i",
-                            "o",
-                            "p",
-                            "r",
-                            "w"
-                        ]
-                    },
-                    "image/powderaverage": {
-                        "branch": "main",
-                        "git_sha": "c3a5dc48a6f49376557fecdd212d077946cf0c2e",
-                        "installed_by": [
-                            "_",
-                            "c",
-                            "d",
-                            "e",
-                            "i",
-                            "o",
-                            "p",
-                            "r",
-                            "w"
-                        ]
-                    },
-                    "reconst/dtimetrics": {
-                        "branch": "main",
-                        "git_sha": "452075a707a9769b0509fc33a1051e8ba80799bf",
-                        "installed_by": [
-                            "modules"
-                        ]
-                    },
-                    "reconst/fodf": {
-                        "branch": "main",
-                        "git_sha": "c399791d89aad88aceedec1bc5221dfeb0952cd5",
-                        "installed_by": [
-                            "modules"
-                        ]
-                    },
-                    "reconst/frf": {
-                        "branch": "main",
-                        "git_sha": "a51881f1c316e0e52b68fa66d7465c32339e2142",
-                        "installed_by": [
-                            "modules"
-                        ]
-                    },
-                    "reconst/meanfrf": {
-                        "branch": "main",
-                        "git_sha": "f9676160a7d9e71ad072c39f32bcc7e7f1621d7a",
-                        "installed_by": [
-                            "modules"
-                        ]
-                    }
-                }
-            },
-            "subworkflows": {
-                "nf-neuro": {
-                    "load_test_data": {
-                        "branch": "main",
-                        "git_sha": "a79cb5c9645269db389c563f674b17c5e900a50b",
-                        "installed_by": [
-                            "subworkflows"
-                        ]
-                    }
-                }
-            }
+  "name": "BundleParc",
+  "homePage": "https://github.com/scil-vital/BundleParc",
+  "repos": {
+    "https://github.com/nf-neuro/modules.git": {
+      "modules": {
+        "nf-neuro": {
+          "betcrop/dwi2mask": {
+            "branch": "main",
+            "git_sha": "31193a9ea0839d2ce29898504812ffdb515b67dc",
+            "installed_by": ["modules"]
+          },
+          "reconst/dtimetrics": {
+            "branch": "main",
+            "git_sha": "f2d66a70673d3002965ab9fbd648db7b5b9d4a34",
+            "installed_by": ["modules"]
+          },
+          "reconst/fodf": {
+            "branch": "main",
+            "git_sha": "f2d66a70673d3002965ab9fbd648db7b5b9d4a34",
+            "installed_by": ["modules"]
+          },
+          "reconst/frf": {
+            "branch": "main",
+            "git_sha": "f2d66a70673d3002965ab9fbd648db7b5b9d4a34",
+            "installed_by": ["modules"]
+          },
+          "reconst/meanfrf": {
+            "branch": "main",
+            "git_sha": "8dbfcf5470fa6bfacb6401badbe9674713a8dece",
+            "installed_by": ["modules"]
+          }
         }
+      },
+      "subworkflows": {
+        "nf-neuro": {
+          "load_test_data": {
+            "branch": "main",
+            "git_sha": "a79cb5c9645269db389c563f674b17c5e900a50b",
+            "installed_by": ["subworkflows"]
+          }
+        }
+      }
     }
+  }
 }

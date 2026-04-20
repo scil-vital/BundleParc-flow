@@ -1,2 +1,0 @@
-image/convert:
-  - "modules/nf-neuro/image/convert/**"

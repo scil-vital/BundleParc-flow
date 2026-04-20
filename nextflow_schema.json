@@ -1,8 +1,8 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://raw.githubusercontent.com/scilus/sf-tractomics/main/nextflow_schema.json",
-    "title": "scilus/sf-tractomics pipeline parameters",
-    "description": "Human diffusion MRI processing and tractography",
+    "$id": "https://raw.githubusercontent.com/scil-vital/BundleParc-flow/main/nextflow_schema.json",
+    "title": "scil-vital/bundleparc-flow pipeline parameters",
+    "description": "Automatic white matter parcellation without tractography.",
     "type": "object",
     "$defs": {
         "input_output_options": {
