@@ -32,8 +32,8 @@ process CHECK_STRIDE {
         ln -s $bvec ${prefix}__dwi_stride_corrected.bvec
         ln -s $bval ${prefix}__dwi_stride_corrected.bval
     else
-        mrconvert $dwi ${prefix}__dwi_stride_corrected.nii.gz -stride "-1 2 3 4"
-        dwigradcheck $dwi -fslgrad $bvec $bval \
+        mrconvert $dwi ${prefix}__dwi_stride_corrected.nii.gz -stride "-1 2 3 4" \
+            -fslgrad $bvec $bval \
             -export_grad_fsl ${prefix}__dwi_stride_corrected.bvec \
             ${prefix}__dwi_stride_corrected.bval
     fi
