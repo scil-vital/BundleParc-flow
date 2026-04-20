@@ -1,0 +1,216 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/scilus/sf-tractomics/main/nextflow_schema.json",
+    "title": "scilus/sf-tractomics pipeline parameters",
+    "description": "Human diffusion MRI processing and tractography",
+    "type": "object",
+    "$defs": {
+        "input_output_options": {
+            "title": "Input/output options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Define where the pipeline should find input data and save output data.",
+            "help_text": "Specify input directory",
+            "required": ["input", "outdir"],
+            "properties": {
+                "input": {
+                    "type": "string",
+                    "description": "DWI folder containing all subjects to process.",
+                    "fa_icon": "fas fa-file",
+                    "help_text": "Each subject folder should include *dwi.nii.gz, *bval and *bvec files.",
+                    "format": "directory-path"
+                },
+                "outdir": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
+                    "fa_icon": "fas fa-folder-open",
+                    "help_text": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure."
+                },
+                "help": {
+                    "type": ["boolean", "string"],
+                    "description": "Display the help message."
+                },
+                "help_full": {
+                    "type": "boolean",
+                    "description": "Display the full detailed help message.",
+                    "default": false
+                }
+            }
+        },
+        "bundleparc_options": {
+            "title": "BundleParc options",
+            "type": "object",
+            "description": "All parameters related to BundleParc parcellation.",
+            "properties": {
+                "nb_pts": {
+                    "type": "integer",
+                    "default": 10,
+                    "description": "Number of parcels per bundle.",
+                    "help_text": "Number of parcels per bundle."
+                },
+                "continuous": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "If set, will produce continous parcellation maps.",
+                    "help_text": "If set, will produce continous parcellation maps."
+                },
+                "mm": {
+                    "type": "integer",
+                    "default": false,
+                    "description": "If set, will produce parcels millimeters thick instead of a fixed number of parcels.",
+                    "help_text": "If set, will produce parcels millimeters thick instead of a fixed number of parcels."
+                },
+                "min_blob_size": {
+                    "type": "integer",
+                    "default": 50,
+                    "description": "Minimum size of the blobs in number of voxels.",
+                    "help_text": "Minimum size of the blobs in number of voxels. Smaller blobs will be removed from the parcellation maps."
+                },
+                "keep_biggest_blob": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "If set, will only keep the biggest blob.",
+                    "help_text": "If set, will keep the biggest blob. Smaller blobs will be discarded."
+                },
+                "half_precision": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "If set, will run BundleParc in half precision (float16). This can reduce the memory usage and speed up the computation, but can also lead to numerical instability.",
+                    "help_text": "If set, will run BundleParc in half precision (float16). This can reduce the memory usage and speed up the computation, but can also lead to numerical instability."
+                }
+        },
+        "dwi_processing_options": {
+            "title": "DWI processing options",
+            "type": "object",
+            "description": "All parameters related to DWI processing (SH, DTI, fODF).",
+            "properties": {
+                "max_dti_shell_value": {
+                    "type": "integer",
+                    "default": 1200,
+                    "description": "Maximum shell threshold to be consider as a DTI shell. This is the default behavior to select DTI shells.",
+                    "help_text": "Maximum shell threshold to be consider as a DTI shell. This is the default behavior to select DTI shells.",
+                    "minimum": 0
+                },
+                "dti_shells": {
+                    "type": "string",
+                    "description": "Shells selected to compute the DTI metrics (generally b <= 1200). Please write them between quotes e.g. (--dti_shells \"0 300 1000\"). If selected, it will overwrite max_dti_shell_value.",
+                    "help_text": "Shells selected to compute the DTI metrics (generally b <= 1200). Please write them between quotes e.g. (--dti_shells \"0 300 1000\"). If selected, it will overwrite max_dti_shell_value."
+                },
+                "min_fodf_shell_value": {
+                    "type": "integer",
+                    "default": 700,
+                    "description": "Minimum shell threshold to be consider as a fODF shell. This is the default behaviour to select fODF shells.",
+                    "help_text": "Minimum shell threshold to be consider as a fODF shell. This is the default behaviour to select fODF shells.",
+                    "minimum": 0
+                },
+                "fodf_shells": {
+                    "type": "string",
+                    "description": "Shells selected to compute the fODF metrics (generally b >= 700). Please write them between quotes e.g. (--fodf_shells \"0 1000 2000\"). If selected, it will overwrite min_fodf_shell_value.",
+                    "help_text": "Shells selected to compute the fODF metrics (generally b >= 700). Please write them between quotes e.g. (--fodf_shells \"0 1000 2000\"). If selected, it will overwrite min_fodf_shell_value."
+                },
+                "fa": {
+                    "type": "number",
+                    "default": 0.7,
+                    "description": "Initial FA threshold to compute the frf.",
+                    "help_text": "Initial FA threshold to compute the frf.",
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "min_fa": {
+                    "type": "number",
+                    "default": 0.5,
+                    "description": "Minimum FA threshold to compute the frf.",
+                    "help_text": "Minimum FA threshold to compute the frf.",
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "min_nvox": {
+                    "type": "integer",
+                    "default": 300,
+                    "description": "Minimum number of voxels to compute the frf.",
+                    "help_text": "Minimum number of voxels to compute the frf.",
+                    "minimum": 1
+                },
+                "roi_radius": {
+                    "type": "integer",
+                    "default": 20,
+                    "description": "Region of interest radius to compute the frf.",
+                    "help_text": "Region of interest radius to compute the frf."
+                },
+                "manual_frf": {
+                    "type": "string",
+                    "description": "Force a fiber response function. Supply as 3 values : --manual_frf \"mean_b0 parallel_diff perpendicular_diff\".",
+                    "help_text": "Force a fiber response function. Supply as 3 values : --manual_frf \"mean_b0 parallel_diff perpendicular_diff\".",
+                    "default": "15,4,4"
+                },
+                "mean_frf": {
+                    "type": "boolean",
+                    "description": "Average the frf of all subjects. USE ONLY IF ALL OF SUBJECTS COME FROM THE SAME SCANNER AND ADHERE TO THE SAME ACQUISITION PROTOCOL.",
+                    "help_text": "Average the frf of all subjects. USE ONLY IF ALL OF SUBJECTS COME FROM THE SAME SCANNER AND ADHERE TO THE SAME ACQUISITION PROTOCOL."
+                },
+                "sh_order": {
+                    "type": "integer",
+                    "default": 8,
+                    "description": "Spherical harmonics order, must be even. Rules : sh_order=8 for 45 directions, sh_order=6 for 28 directions.",
+                    "help_text": "Spherical harmonics order, must be even. Rules : sh_order=8 for 45 directions, sh_order=6 for 28 directions.",
+                    "minimum": 2
+                },
+                "basis": {
+                    "type": "string",
+                    "default": "descoteaux07",
+                    "description": "fODF basis.",
+                    "help_text": "fODF basis.",
+                    "enum": ["descoteaux07", "tournier07"]
+                },
+                "fodf_metrics_a_factor": {
+                    "type": "number",
+                    "default": 2.0,
+                    "description": "Multiplicative factor for AFD max in ventricles.",
+                    "help_text": "Multiplicative factor for AFD max in ventricles.",
+                    "minimum": 0
+                },
+                "relative_threshold": {
+                    "type": "number",
+                    "default": 0.1,
+                    "description": "Relative threshold on fODF amplitude in ]0,1].",
+                    "help_text": "Relative threshold on fODF amplitude in ]0,1].",
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "max_fa_in_ventricle": {
+                    "type": "number",
+                    "default": 0.1,
+                    "description": "Maximal threshold of FA to be considered as ventricles voxels.",
+                    "help_text": "Maximal threshold of FA to be considered as ventricles voxels.",
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "min_md_in_ventricle": {
+                    "type": "number",
+                    "default": 0.003,
+                    "description": "Minimal threshold of MD in mm2/s to be considered as ventricles voxels.",
+                    "help_text": "Minimal threshold of MD in mm2/s to be considered as ventricles voxels.",
+                    "minimum": 0
+                },
+                "sh_fitting": {
+                    "type": "boolean",
+                    "description": "Compute a Spherical Harmonics fit on the DWI, and output the SH coefficients in a Nifti file.",
+                    "help_text": "Compute a Spherical Harmonics fit on the DWI, and output the SH coefficients in a Nifti file.",
+                    "default": false
+                }
+            }
+        }
+    },
+    "allOf": [
+        {
+            "$ref": "#/$defs/input_output_options"
+        },
+        {
+            "$ref": "#/$defs/bundleparc_options"
+        },
+        {
+            "$ref": "#/$defs/dwi_processing_options"
+        }
+    ]
+}

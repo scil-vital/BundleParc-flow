@@ -1,13 +1,13 @@
 nextflow_process {
 
-    name "Test Process BETCROP_DWI2MASK"
+    name "Test Process IMAGE_POWDERAVERAGE"
     script "../main.nf"
-    process "BETCROP_DWI2MASK"
+    process "IMAGE_POWDERAVERAGE"
 
     tag "modules"
     tag "modules_nfneuro"
-    tag "betcrop"
-    tag "betcrop/dwi2mask"
+    tag "image"
+    tag "image/powderaverage"
 
     tag "subworkflows"
     tag "subworkflows/load_test_data"
@@ -24,9 +24,9 @@ nextflow_process {
         }
     }
 
-    test("betcrop - dwi2mask - dwi") {
+    test("powderaverage - no mask and no shell") {
 
-        config "./nextflow.config"
+        config "./nextflow_noshells.config"
 
         when {
             process {
@@ -36,7 +36,7 @@ nextflow_process {
                         [ id:'test', single_end:false ], // meta map
                         file("\${test_data_directory}/dwi/dwi.nii.gz"),
                         file("\${test_data_directory}/dwi/dwi.bval"),
-                        file("\${test_data_directory}/dwi/dwi.bvec")
+                        []
                     ]
                 }
                 """
@@ -49,11 +49,36 @@ nextflow_process {
                 { assert snapshot(process.out).match() }
             )
         }
-
     }
 
-    test("betcrop - dwi2mask - stub-run") {
+    test("powderaverage - with mask and shells") {
 
+        config "./nextflow_shells.config"
+
+        when {
+            process {
+                """
+                input[0] = LOAD_DATA.out.test_data_directory.map{
+                    test_data_directory -> [
+                        [ id:'test', single_end:false ], // meta map
+                        file("\${test_data_directory}/dwi/dwi.nii.gz"),
+                        file("\${test_data_directory}/dwi/dwi.bval"),
+                        file("\${test_data_directory}/dwi/mask.nii.gz")
+                    ]
+                }
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+    }
+
+    test("powderaverage - stub-run") {
         tag "stub"
         options "-stub-run"
 
@@ -65,7 +90,7 @@ nextflow_process {
                         [ id:'test', single_end:false ], // meta map
                         file("\${test_data_directory}/dwi/dwi.nii.gz"),
                         file("\${test_data_directory}/dwi/dwi.bval"),
-                        file("\${test_data_directory}/dwi/dwi.bvec")
+                        []
                     ]
                 }
                 """
@@ -78,7 +103,5 @@ nextflow_process {
                 { assert snapshot(process.out.versions).match() }
             )
         }
-
     }
-
 }

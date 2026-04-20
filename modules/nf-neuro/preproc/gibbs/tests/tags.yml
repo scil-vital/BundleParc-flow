@@ -1,2 +1,0 @@
-preproc/gibbs:
-  - "modules/nf-neuro/preproc/gibbs/**"

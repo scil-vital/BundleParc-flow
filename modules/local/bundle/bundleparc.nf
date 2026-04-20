@@ -25,8 +25,8 @@ process BUNDLE_BUNDLEPARC {
     //               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
     // TODO nf-core: See section in main README for further information regarding finding and adding container addresses to the section below.
         container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-                'https://scil.usherbrooke.ca/containers/scilus_dev.sif':
-                'scilus/scilus:dev' }"
+                'https://scil.usherbrooke.ca/containers/scilus_2.2.2.sif':
+                'scilus/scilus:2.2.2' }"
 
     input:
         tuple val(meta), path(fodf), path(checkpoint)

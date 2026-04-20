@@ -1,84 +1,83 @@
 nextflow_process {
 
-    name "Test Process BETCROP_DWI2MASK"
+    name "Test Process BETCROP_SYNTHSTRIP"
     script "../main.nf"
-    process "BETCROP_DWI2MASK"
+    process "BETCROP_SYNTHSTRIP"
+    config "./nextflow.config"
 
     tag "modules"
     tag "modules_nfneuro"
     tag "betcrop"
-    tag "betcrop/dwi2mask"
+    tag "betcrop/synthstrip"
 
     tag "subworkflows"
     tag "subworkflows/load_test_data"
 
-    setup {
-        run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
-            script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
-            process {
-                """
-                input[0] = channel.from( [ "heavy.zip" ] )
-                input[1] = "test.load-test-data"
-                """
+    test("betcrop - synthstrip") {
+        setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = channel.from( [ "freesurfer.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
             }
         }
-    }
-
-    test("betcrop - dwi2mask - dwi") {
-
-        config "./nextflow.config"
-
         when {
             process {
                 """
                 input[0] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ], // meta map
-                        file("\${test_data_directory}/dwi/dwi.nii.gz"),
-                        file("\${test_data_directory}/dwi/dwi.bval"),
-                        file("\${test_data_directory}/dwi/dwi.bvec")
+                        file("\${test_data_directory}/anat_image.nii.gz"),
+                        []
                     ]
                 }
                 """
             }
         }
-
         then {
             assertAll(
                 { assert process.success },
                 { assert snapshot(process.out).match() }
             )
         }
-
     }
 
-    test("betcrop - dwi2mask - stub-run") {
-
+    test("betcrop - synthstrip - stub-run") {
         tag "stub"
         options "-stub-run"
-
+        setup {
+            run("LOAD_TEST_DATA", alias: "LOAD_DATA") {
+                script "../../../../../subworkflows/nf-neuro/load_test_data/main.nf"
+                process {
+                    """
+                    input[0] = channel.from( [ "freesurfer.zip" ] )
+                    input[1] = "test.load-test-data"
+                    """
+                }
+            }
+        }
         when {
             process {
                 """
                 input[0] = LOAD_DATA.out.test_data_directory.map{
                     test_data_directory -> [
                         [ id:'test', single_end:false ], // meta map
-                        file("\${test_data_directory}/dwi/dwi.nii.gz"),
-                        file("\${test_data_directory}/dwi/dwi.bval"),
-                        file("\${test_data_directory}/dwi/dwi.bvec")
+                        file("\${test_data_directory}/anat_image.nii.gz"),
+                        []
                     ]
                 }
                 """
             }
         }
-
         then {
             assertAll(
                 { assert process.success },
                 { assert snapshot(process.out.versions).match() }
             )
         }
-
     }
-
 }
