@@ -1,0 +1,101 @@
+name: image_convertdwi
+description: |
+  Small utility module to perform data type conversion on dwi images. The new
+  datatype can be specified using the task.ext.datatype parameter. Using strides parameters,
+  it will convert the dwi as well as the bval and bvec files to ensure they remain consistent with the converted image.
+keywords:
+  - image
+  - dwi
+  - convert
+  - datatype
+tools:
+  - MRtrix3:
+      description: |
+        MRtrix3 is a software package for various types of diffusion imaging
+        data, including diffusion-weighted, diffusion-tensor, and q-ball imaging.
+      homepage: https://www.mrtrix.org/
+      doi: 10.1016/j.neuroimage.2019.116137
+      identifier: ""
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1', single_end:false ]`
+    - image:
+        type: file
+        description: Image to convert.
+        pattern: "*.nii.gz"
+        ontologies:
+          - edam: http://edamontology.org/format_3989 # GZIP format
+    - bval:
+        type: file
+        description: B-values in FSL format [DWI].
+        pattern: "*.bval"
+        ontologies: []
+    - bvec:
+        type: file
+        description: B-values in FSL format [DWI].
+        pattern: "*.bvec"
+        ontologies: []
+args:
+  - datatype:
+      type: string
+      description:
+        Data type to convert the image to. This should be a valid data type supported by MRtrix3, such as "float32", "int16", etc.
+        If not specified, the module will fail.
+  - suffix:
+      type: string
+      description: Optional suffix to add to the output filename before the datatype.
+        If not specified, the output filename will only include the datatype as a suffix.
+  - strides:
+      type: string
+      description: Optional strides to specify the memory layout of the output image.
+        This should be a space-separated string of integers, such as "1 2 3 4".
+        If not specified, the default memory layout will be used.
+output:
+  image:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*.nii.gz":
+          type: file
+          description: Image converted into the specified datatype.
+          pattern: "*.nii.gz"
+          ontologies:
+            - edam: http://edamontology.org/format_3989 # GZIP format
+  bval:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*.bval":
+          type: file
+          description: B-values corrected in FSL format
+          pattern: "*.bval"
+          ontologies: []
+  bvec:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
+      - "*.bvec":
+          type: file
+          description: B-vectors corrected in FSL format
+          pattern: "*.bvec"
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
+authors:
+  - "@arnaudbore"
+maintainers:
+  - "@arnaudbore"

@@ -1,0 +1,49 @@
+{
+    "betcrop - dwi2mask - dwi": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_dwi_mask.nii.gz:md5,0167294b94316c7012c13b32d4af42f2"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,c9a3067bf8a645feb2ff531ea05c1c4e"
+                ],
+                "mask": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_dwi_mask.nii.gz:md5,0167294b94316c7012c13b32d4af42f2"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,c9a3067bf8a645feb2ff531ea05c1c4e"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2025-12-08T10:54:12.897462053"
+    },
+    "betcrop - dwi2mask - stub-run": {
+        "content": [
+            [
+                "versions.yml:md5,c9a3067bf8a645feb2ff531ea05c1c4e"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2025-12-08T10:02:30.372787578"
+    }
+}

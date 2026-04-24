@@ -9,27 +9,15 @@ Paper submitted to Medical Image Analysis. In the meantime, please contact us fo
 - [Nextflow](https://www.nextflow.io/)
 - [Docker](https://www.docker.com/) or [Singularity](https://sylabs.io/docs/)
 
-## Installation
-1. Clone the repository:
-
-   ```bash
-   git clone git@github.com:scil-vital/BundleParc-flow.git
-   cd BundleParc-flow
-    ```
-That's it ! 
-
 ## Usage
 
-1. From FOD
-  ```bash
-    nextflow run main.nf --fodf <input> -profile docker --nb_pts <nb>
-  ```
-2. From DWI
-  ```bash
-  nextflow run main.nf --dwi <input> -profile docker --nb_pts <nb>
-  ```
+```bash
+nextflow run scil-vital/BundleParc-flow -profile <docker/singularity>,gpu --input <INPUT> --outdir <OUTDIR> 
+```
 
-See USAGE for more instructions on how to run the workflow. Have a question ? Found a problem ? Please open an issue or contact me at antoine (dot) theberge (at) usherbrooke (dot) ca.
+See USAGE for more instructions on how to run the workflow or use `--help` for more details.
+
+Note: you will most likely have to have internet access when running for the first time to pull the code, docker containers and model weights. Have a question ? Found a problem ? Please open an issue or contact me at antoine (dot) theberge (at) usherbrooke (dot) ca.
 
 ## Bundles
 

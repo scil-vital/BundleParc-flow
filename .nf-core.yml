@@ -1,2 +1,16 @@
----
+nf_core_version: 3.5.1
 repository_type: pipeline
+template:
+  author: "@AntoineTheb"
+  description: BundleParc
+  force: false
+  is_nfcore: false
+  name: BundleParc
+  org: scil-vital
+  outdir: .
+  skip_features:
+    - igenomes
+    - fastqc
+    - slackreport
+    - seqera_platform
+  version: 1.0dev

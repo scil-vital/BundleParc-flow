@@ -1,2 +1,0 @@
-preproc/normalize:
-  - "modules/nf-neuro/preproc/normalize/**"

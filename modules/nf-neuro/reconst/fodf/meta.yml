@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/scilus/nf-neuro/main/modules/meta-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-neuro/modules/main/modules/meta-schema.json
 name: reconst_fodf
 description: Perform FODF reconstruction and compute FODF metrics from a dwi volume
   for a selected number of shells. Note that multiple choices of FODF reconstruction
@@ -141,6 +141,10 @@ args:
       type: boolean
       description: If set, will output the ventricle mask estimated from an MD and
         FA threshold.
+      default: false
+  - single_thread:
+      type: boolean
+      description: If true, the command will be run in single-threaded mode. By default, the command will use multiple threads based on the number of CPUs allocated to the task.
       default: false
 input:
   - - meta:

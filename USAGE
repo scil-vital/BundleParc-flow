@@ -1,28 +1,84 @@
+===============
 BundleParc-flow
+===============
 
-You can provide either diffusion weighted imaging (DWI) volumes input, incl. related bvecs and bvals, or
-fiber orientation distribution (FOD) volumes.
+Typical pipeline command: 
+   
+	$ nextflow run scil-vital/BundleParc-flow -profile <docker/singularity>,gpu --input <INPUT> --outdir <OUTDIR>
 
-fODF **MUST** be in spherical harmonics (SH), `descoteaux07` basis of order 6 or 8, with stride of
--1,2,3,4. If you have any doubts, it is recommended that you use the --dwi input instead.
+You must provide diffusion weighted imaging (DWI) volumes input, incl. related bvecs and bvals.
 
-You can provide an input directory containing all FOD volumes using:
-    --fodf=/path/to/[input]   Input directory containing your subjects
-                    |
-                    ├-- S1
-                    |    ├-- *fodf.nii.gz
-                    └-- S2
-                         └-- *fodf.nii.gz
-
-Or an input directory containing all DWI input using:
-    --dwi=/path/to/[input]   Input directory containing your subjects
+The input directory containing all DWI input must have this structure:
+    --input=/path/to/[input]   Input directory containing your subjects
                     |
                     ├-- S1
                     |    ├-- *dwi.nii.gz
                     |    ├-- *dwi.bval
-                    |    ├-- *dwi.bvec
+                    |    └-- *dwi.bvec
                     └-- S2
                          ├-- *dwi.nii.gz
                          ├-- *dwi.bval
                          └-- *dwi.bvec
 
+Profiles
+========
+
+  gpu                          [boolean] Enable GPU usage. STRONGLY recommended.
+  docker                       [boolean] Use docker to run components. If set to false (and singularity profile is not used either), components will run locally.
+  singularity                  [boolean] Use Apptainer/Singularity to run components. If set to false (and docker profile is not used either), components will run locally.
+
+Input/output options
+====================
+
+  --input                      [string]          DWI folder containing all subjects to process.
+  --outdir                     [string]          The output directory where the results will be saved.
+  --help                       [boolean, string] Display the help message. 
+  --help_full                  [boolean]         Display the full detailed help message. 
+  --show_hidden                [boolean]         Display hidden parameters in the help message (only works when --help or --help_full are provided). 
+
+BundleParc options
+==================
+
+  --nb_pts                     [integer] Number of parcels per bundle. [default: 10] 
+  --continuous                 [boolean] If set, will produce continous parcellation maps. 
+  --mm                         [integer] If set, will produce parcels millimeters thick instead of a fixed number of parcels. [default: false] 
+  --min_blob_size              [integer] Minimum size of the blobs in number of voxels. [default: 50] 
+  --keep_biggest_blob          [boolean] If set, will only keep the biggest blob. 
+  --half_precision             [boolean] If set, will run BundleParc in half precision (float16). This can reduce the memory usage and speed up the computation, but can also lead to numerical instability.  
+  --bundleparc_checkpoint      [string]  BundleParc weights. 
+
+DWI processing options
+======================
+
+  --max_dti_shell_value        [integer] Maximum shell threshold to be consider as a DTI shell. This is the default behavior to select DTI shells. [default: 1200] 
+  --dti_shells                 [string]  Shells selected to compute the DTI metrics (generally b <= 1200). Please write them between quotes e.g. (--dti_shells "0 300 1000"). If selected, it will overwrite max_dti_shell_value. 
+  --min_fodf_shell_value       [integer] Minimum shell threshold to be consider as a fODF shell. This is the default behaviour to select fODF shells. [default: 700] 
+  --fodf_shells                [string]  Shells selected to compute the fODF metrics (generally b >= 700). Please write them between quotes e.g. (--fodf_shells "0 1000 2000"). If selected, it will overwrite min_fodf_shell_value. 
+  --fa                         [number]  Initial FA threshold to compute the frf. [default: 0.7] 
+  --min_fa                     [number]  Minimum FA threshold to compute the frf. [default: 0.5] 
+  --min_nvox                   [integer] Minimum number of voxels to compute the frf. [default: 300] 
+  --roi_radius                 [integer] Region of interest radius to compute the frf. [default: 20] 
+  --manual_frf                 [string]  Force a fiber response function. Supply as 3 values : --manual_frf "mean_b0 parallel_diff perpendicular_diff". [default: 15,4,4] 
+  --mean_frf                   [boolean] Average the frf of all subjects. USE ONLY IF ALL OF SUBJECTS COME FROM THE SAME SCANNER AND ADHERE TO THE SAME ACQUISITION PROTOCOL. 
+  --sh_order                   [integer] Spherical harmonics order, must be even. Rules : sh_order=8 for 45 directions, sh_order=6 for 28 directions. [default: 8] 
+  --fodf_metrics_a_factor      [number]  Multiplicative factor for AFD max in ventricles. [default: 2.0] 
+  --relative_threshold         [number]  Relative threshold on fODF amplitude in ]0,1]. [default: 0.1] 
+  --max_fa_in_ventricle        [number]  Maximal threshold of FA to be considered as ventricles voxels. [default: 0.1] 
+  --min_md_in_ventricle        [number]  Minimal threshold of MD in mm2/s to be considered as ventricles voxels. [default: 0.003] 
+
+Institutional config options
+============================
+
+  --custom_config_version      [string] Git commit id for Institutional configs. [default: master] 
+  --custom_config_base         [string] Base directory for Institutional configs. [default: https://raw.githubusercontent.com/nf-core/configs/master] 
+  --config_profile_name        [string] Institutional config name. 
+  --config_profile_description [string] Institutional config description. 
+  --config_profile_contact     [string] Institutional config contact information. 
+  --config_profile_url         [string] Institutional config URL link. 
+
+Generic options
+===============
+
+  --version                    [boolean] Display version and exit. 
+  --publish_dir_mode           [string]  Method used to save pipeline results to output directory.  (accepted: symlink, rellink, link, copy, copyNoFollow, move) [default: copy] 
+  --monochrome_logs            [boolean] Do not use coloured log outputs. 
