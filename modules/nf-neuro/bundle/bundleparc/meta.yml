@@ -35,7 +35,7 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test', single_end:false ]`
-      - "*__*_*.nii.gz":
+      - "*__*.nii.gz":
           type: file
           description: Label maps
           pattern: "*.nii.gz"

@@ -33,7 +33,7 @@
           },
           "bundle/bundleparc": {
             "branch": "main",
-            "git_sha": "4ca1d08d79aec05cd3c031ef74273f78d408bb72",
+            "git_sha": "55128ae503558eb49d5201010ae9a486ed942d81",
             "installed_by": ["bundleparc"]
           },
           "image/convertdwi": {

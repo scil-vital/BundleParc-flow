@@ -8,7 +8,7 @@ process BUNDLE_BUNDLEPARC {
     tuple val(meta), path(fodf), path(checkpoint)
 
     output:
-    tuple val(meta), path("*__*_*.nii.gz"), emit: labels
+    tuple val(meta), path("*__*.nii.gz"), emit: labels
     path "versions.yml"              , emit: versions
 
     when:

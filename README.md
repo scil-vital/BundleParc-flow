@@ -1,8 +1,16 @@
 # BundleParc-flow
 
+[![Nextflow](https://img.shields.io/badge/version-%E2%89%A525.04.6-green?style=flat&logo=nextflow&logoColor=white&color=%230DC09D&link=https%3A%2F%2Fnextflow.io)](https://www.nextflow.io/)
+[![nf-core template version](https://img.shields.io/badge/nf--core_template-3.5.2-green?style=flat&logo=nfcore&logoColor=white&color=%2324B064&link=https%3A%2F%2Fnf-co.re)](https://github.com/nf-core/tools/releases/tag/3.5.2)
+[![run with docker](https://img.shields.io/badge/run%20with-docker-0db7ed?labelColor=000000&logo=docker)](https://www.docker.com/)
+[![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
+
 BundleParc-flow is a workflow for parcellating white matter bundles from diffusion MRI using [BundleParc](https://github.com/scil-vital/BundleParc) and nextflow.
 
-Paper submitted to Medical Image Analysis. In the meantime, please contact us for acknowledgments.
+Please cite as
+```
+Théberge, A., Yamani, Z. E., Barakovic, M., Magon, S., Yang, J. Y.-M., Descoteaux, M., Rheault, F., Jodoin, P.-M. (2026). BundleParc: Consistent white matter bundle parcellation without tractography. Medical Image Analysis, 104087. doi:10.1016/j.media.2026.104087
+```
 
 ## Requirements
 
