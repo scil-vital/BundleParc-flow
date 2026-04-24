@@ -12,21 +12,12 @@ Paper submitted to Medical Image Analysis. In the meantime, please contact us fo
 ## Usage
 
 ```bash
-nextflow run scil-vital/BundleParc-flow --dwi <input> -profile docker --nb_pts <nb>
+nextflow run scil-vital/BundleParc-flow -profile <docker/singularity>,gpu --input <INPUT> --outdir <OUTDIR> 
 ```
 
-Options:
-- `--dwi` : path to the input diffusion MRI (see USAGE for file structure)
-- `--nb_pts <NB>` : number of labels to parcellate the bundles into (default: 10)
-- `--mm <NN>` : whether to use millimeters as unit for the parcellation (default: false, i.e. use percentage of the bundle length)
-- `--continuous` : whether to use continuous parcellation (default: false, i.e. use discrete parcellation)
-- `--min_blob_size <NB>` : minimum size of the blobs in voxels(default: 50 voxels). Smaller blobs will be pruned.
-- `--keep_biggest_blob` : whether to keep only the biggest blob (default: false, i.e. keep all blobs)
-- `--half_precision`: run the model using half precision (float16) instead of full precision (float32) (default: false). This can speed up the inference on compatible GPUs and reduce memory usage, but may slightly reduce the accuracy of the parcellation. Use with caution.
+See USAGE for more instructions on how to run the workflow or use `--help` for more details.
 
-Note: you will most likely have to have internet access when running for the first time to pull the code, docker containers and model weights.
-
-See USAGE for more instructions on how to run the workflow. Have a question ? Found a problem ? Please open an issue or contact me at antoine (dot) theberge (at) usherbrooke (dot) ca.
+Note: you will most likely have to have internet access when running for the first time to pull the code, docker containers and model weights. Have a question ? Found a problem ? Please open an issue or contact me at antoine (dot) theberge (at) usherbrooke (dot) ca.
 
 ## Bundles
 

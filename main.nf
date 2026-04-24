@@ -6,11 +6,11 @@ include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_bund
 workflow SCILVITAL_BUNDLEPARC_FLOW {
 
     take:
-    ch_sid_dwi // channel: dwi_bval_bvec read from --input
+    ch_dwi_bval_bvec // channel: dwi_bval_bvec read from --input
 
     main:
 
-    BUNDLEPARC_FLOW ( ch_sid_dwi )
+    BUNDLEPARC_FLOW ( ch_dwi_bval_bvec )
 
 }
 
@@ -33,7 +33,7 @@ workflow {
 
     // WORKFLOW: Run main workflow
     SCILVITAL_BUNDLEPARC_FLOW(
-        PIPELINE_INITIALISATION.out.ch_sid_dwi
+        PIPELINE_INITIALISATION.out.ch_dwi_bval_bvec
     )
 
 }

@@ -26,7 +26,7 @@ workflow PIPELINE_INITIALISATION {
     monochrome_logs   // boolean: Do not use coloured log outputs
     nextflow_cli_args //   array: List of positional nextflow CLI args
     outdir            //  string: The output directory where the results will be saved
-    input             //  string: Path to input samplesheet
+    input             //  string: Path to input folder
     help              // boolean: Display help message and exit
     help_full         // boolean: Show the full help message
     show_hidden       // boolean: Show hidden parameters in the help message
@@ -34,7 +34,7 @@ workflow PIPELINE_INITIALISATION {
     main:
 
     ch_versions = channel.empty()
-    ch_samplesheet = channel.empty()
+    ch_dwi_bval_bvec = channel.empty()
 
     //
     // Print version and exit if required and dump pipeline parameters to JSON file
@@ -49,7 +49,7 @@ workflow PIPELINE_INITIALISATION {
     //
     // Validate parameters and generate parameter summary to stdout
     //
-    command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>"
+    command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute>,gpu --input <INPUT> --outdir <OUTDIR>"
     before_text = """
 -\033[2m----------------------------------------------------------------------------------\033[0m-
 
@@ -91,7 +91,7 @@ workflow PIPELINE_INITIALISATION {
     //
     if ( params.input ) {
     input = file(params.input)
-    ch_sid_dwi = Channel
+    ch_dwi_bval_bvec = Channel
         .fromFilePairs("$input/**/*{bval,bvec,dwi.nii.gz}",
                      size: 3,
                      flat: true) { it.parent.name } // Set the subject filename as subjectID + '_' + session.
@@ -100,7 +100,7 @@ workflow PIPELINE_INITIALISATION {
     else {
         log.info "You must provide an input directory containing all images using:"
         log.info ""
-        log.info "    --dwi=/path/to/[input]   Input directory containing your subjects"
+        log.info "    --input=/path/to/[input]   Input directory containing your subjects"
         log.info "                    |"
         log.info "                    ├-- S1"
         log.info "                    |    ├-- *dwi.nii.gz"
@@ -115,5 +115,5 @@ workflow PIPELINE_INITIALISATION {
     }
     
     emit:
-    ch_sid_dwi = ch_sid_dwi
+    ch_dwi_bval_bvec = ch_dwi_bval_bvec
 }

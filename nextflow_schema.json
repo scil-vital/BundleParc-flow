@@ -10,7 +10,7 @@
             "type": "object",
             "fa_icon": "fas fa-terminal",
             "description": "Define where the pipeline should find input data and save output data.",
-            "help_text": "Specify input samplesheet and output directory",
+            "help_text": "Specify input and output directories",
             "required": ["input", "outdir"],
             "properties": {
                 "input": {
@@ -165,13 +165,6 @@
                     "description": "Spherical harmonics order, must be even. Rules : sh_order=8 for 45 directions, sh_order=6 for 28 directions.",
                     "help_text": "Spherical harmonics order, must be even. Rules : sh_order=8 for 45 directions, sh_order=6 for 28 directions.",
                     "minimum": 2
-                },
-                "basis": {
-                    "type": "string",
-                    "default": "descoteaux07",
-                    "description": "fODF basis.",
-                    "help_text": "fODF basis.",
-                    "enum": ["descoteaux07", "tournier07"]
                 },
                 "fodf_metrics_a_factor": {
                     "type": "number",

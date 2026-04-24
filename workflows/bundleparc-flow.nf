@@ -14,13 +14,13 @@ include {   RECONST_FODF       } from '../modules/nf-neuro/reconst/fodf/main'
 workflow BUNDLEPARC_FLOW {
 
     take:
-    ch_sid_dwi
+    ch_dwi_bval_bvec
     main:
 
     ch_versions = Channel.empty()
 
         
-    IMAGE_CONVERTDWI ( ch_sid_dwi )
+    IMAGE_CONVERTDWI ( ch_dwi_bval_bvec )
 
     ch_versions = ch_versions.mix(IMAGE_CONVERTDWI.out.versions.first())
 
